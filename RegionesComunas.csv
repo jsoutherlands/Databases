@@ -1,0 +1,347 @@
+Region,Codigo region,Codigo comuna
+Arica y Parinacota,15,15101
+Arica y Parinacota,15,15102
+Arica y Parinacota,15,15202
+Arica y Parinacota,15,15201
+Tarapacá,1,1107
+Tarapacá,1,1402
+Tarapacá,1,1403
+Tarapacá,1,1404
+Tarapacá,1,1101
+Tarapacá,1,1405
+Tarapacá,1,1401
+Antofagasta,2,2101
+Antofagasta,2,2201
+Antofagasta,2,2302
+Antofagasta,2,2102
+Antofagasta,2,2202
+Antofagasta,2,2203
+Antofagasta,2,2103
+Antofagasta,2,2104
+Antofagasta,2,2301
+Atacama,3,3302
+Atacama,3,3102
+Atacama,3,3201
+Atacama,3,3101
+Atacama,3,3202
+Atacama,3,3303
+Atacama,3,3304
+Atacama,3,3103
+Atacama,3,3301
+Coquimbo,4,4103
+Coquimbo,4,4202
+Coquimbo,4,4302
+Coquimbo,4,4102
+Coquimbo,4,4201
+Coquimbo,4,4104
+Coquimbo,4,4101
+Coquimbo,4,4203
+Coquimbo,4,4303
+Coquimbo,4,4301
+Coquimbo,4,4105
+Coquimbo,4,4304
+Coquimbo,4,4305
+Coquimbo,4,4204
+Coquimbo,4,4106
+Valparaíso,5,5602
+Valparaíso,5,5402
+Valparaíso,5,5502
+Valparaíso,5,5302
+Valparaíso,5,5603
+Valparaíso,5,5102
+Valparaíso,5,5702
+Valparaíso,5,5103
+Valparaíso,5,5604
+Valparaíso,5,5605
+Valparaíso,5,5503
+Valparaíso,5,5201
+Valparaíso,5,5104
+Valparaíso,5,5504
+Valparaíso,5,5401
+Valparaíso,5,5802
+Valparaíso,5,5703
+Valparaíso,5,5301
+Valparaíso,5,5506
+Valparaíso,5,5803
+Valparaíso,5,5704
+Valparaíso,5,5403
+Valparaíso,5,5404
+Valparaíso,5,5105
+Valparaíso,5,5705
+Valparaíso,5,5501
+Valparaíso,5,5801
+Valparaíso,5,5107
+Valparaíso,5,5303
+Valparaíso,5,5601
+Valparaíso,5,5304
+Valparaíso,5,5701
+Valparaíso,5,5706
+Valparaíso,5,5606
+Valparaíso,5,5101
+Valparaíso,5,5804
+Valparaíso,5,5109
+Valparaíso,5,5405
+Metropolitana,13,13502
+Metropolitana,13,13402
+Metropolitana,13,13403
+Metropolitana,13,13102
+Metropolitana,13,13103
+Metropolitana,13,13301
+Metropolitana,13,13104
+Metropolitana,13,13503
+Metropolitana,13,13105
+Metropolitana,13,13602
+Metropolitana,13,13106
+Metropolitana,13,13107
+Metropolitana,13,13108
+Metropolitana,13,13603
+Metropolitana,13,13109
+Metropolitana,13,13110
+Metropolitana,13,13111
+Metropolitana,13,13112
+Metropolitana,13,13113
+Metropolitana,13,13302
+Metropolitana,13,13114
+Metropolitana,13,13115
+Metropolitana,13,13116
+Metropolitana,13,13117
+Metropolitana,13,13118
+Metropolitana,13,13119
+Metropolitana,13,13504
+Metropolitana,13,13501
+Metropolitana,13,13120
+Metropolitana,13,13604
+Metropolitana,13,13404
+Metropolitana,13,13121
+Metropolitana,13,13605
+Metropolitana,13,13122
+Metropolitana,13,13202
+Metropolitana,13,13123
+Metropolitana,13,13124
+Metropolitana,13,13201
+Metropolitana,13,13125
+Metropolitana,13,13126
+Metropolitana,13,13127
+Metropolitana,13,13128
+Metropolitana,13,13401
+Metropolitana,13,13129
+Metropolitana,13,13203
+Metropolitana,13,13130
+Metropolitana,13,13505
+Metropolitana,13,13131
+Metropolitana,13,13101
+Metropolitana,13,13601
+Metropolitana,13,13303
+Metropolitana,13,13132
+O’Higgins,6,6302
+O’Higgins,6,6303
+O’Higgins,6,6102
+O’Higgins,6,6103
+O’Higgins,6,6104
+O’Higgins,6,6105
+O’Higgins,6,6106
+O’Higgins,6,6202
+O’Higgins,6,6107
+O’Higgins,6,6203
+O’Higgins,6,6304
+O’Higgins,6,6108
+O’Higgins,6,6109
+O’Higgins,6,6204
+O’Higgins,6,6110
+O’Higgins,6,6305
+O’Higgins,6,6205
+O’Higgins,6,6111
+O’Higgins,6,6306
+O’Higgins,6,6206
+O’Higgins,6,6307
+O’Higgins,6,6112
+O’Higgins,6,6113
+O’Higgins,6,6201
+O’Higgins,6,6308
+O’Higgins,6,6309
+O’Higgins,6,6114
+O’Higgins,6,6101
+O’Higgins,6,6115
+O’Higgins,6,6116
+O’Higgins,6,6301
+O’Higgins,6,6117
+O’Higgins,6,6310
+Maule,7,7201
+Maule,7,7202
+Maule,7,7402
+Maule,7,7102
+Maule,7,7103
+Maule,7,7301
+Maule,7,7104
+Maule,7,7302
+Maule,7,7303
+Maule,7,7401
+Maule,7,7403
+Maule,7,7105
+Maule,7,7304
+Maule,7,7404
+Maule,7,7106
+Maule,7,7203
+Maule,7,7107
+Maule,7,7305
+Maule,7,7405
+Maule,7,7108
+Maule,7,7306
+Maule,7,7307
+Maule,7,7109
+Maule,7,7406
+Maule,7,7110
+Maule,7,7101
+Maule,7,7308
+Maule,7,7309
+Maule,7,7407
+Maule,7,7408
+Ñuble,16,16102
+Ñuble,16,16101
+Ñuble,16,16103
+Ñuble,16,16202
+Ñuble,16,16203
+Ñuble,16,16302
+Ñuble,16,16104
+Ñuble,16,16204
+Ñuble,16,16303
+Ñuble,16,16105
+Ñuble,16,16106
+Ñuble,16,16205
+Ñuble,16,16107
+Ñuble,16,16201
+Ñuble,16,16206
+Ñuble,16,16301
+Ñuble,16,16304
+Ñuble,16,16108
+Ñuble,16,16305
+Ñuble,16,16207
+Ñuble,16,16109
+Biobío,8,8314
+Biobío,8,8302
+Biobío,8,8202
+Biobío,8,8303
+Biobío,8,8203
+Biobío,8,8103
+Biobío,8,8101
+Biobío,8,8204
+Biobío,8,8102
+Biobío,8,8205
+Biobío,8,8104
+Biobío,8,8112
+Biobío,8,8105
+Biobío,8,8304
+Biobío,8,8201
+Biobío,8,8206
+Biobío,8,8301
+Biobío,8,8106
+Biobío,8,8305
+Biobío,8,8306
+Biobío,8,8307
+Biobío,8,8107
+Biobío,8,8308
+Biobío,8,8309
+Biobío,8,8108
+Biobío,8,8310
+Biobío,8,8311
+Biobío,8,8109
+Biobío,8,8110
+Biobío,8,8207
+Biobío,8,8111
+Biobío,8,8312
+Biobío,8,8313
+Araucanía,9,9201
+Araucanía,9,9102
+Araucanía,9,9121
+Araucanía,9,9202
+Araucanía,9,9103
+Araucanía,9,9203
+Araucanía,9,9104
+Araucanía,9,9204
+Araucanía,9,9105
+Araucanía,9,9106
+Araucanía,9,9107
+Araucanía,9,9108
+Araucanía,9,9109
+Araucanía,9,9205
+Araucanía,9,9206
+Araucanía,9,9207
+Araucanía,9,9110
+Araucanía,9,9111
+Araucanía,9,9112
+Araucanía,9,9113
+Araucanía,9,9114
+Araucanía,9,9115
+Araucanía,9,9208
+Araucanía,9,9209
+Araucanía,9,9116
+Araucanía,9,9101
+Araucanía,9,9117
+Araucanía,9,9118
+Araucanía,9,9210
+Araucanía,9,9211
+Araucanía,9,9119
+Araucanía,9,9120
+Los Ríos,14,14102
+Los Ríos,14,14202
+Los Ríos,14,14201
+Los Ríos,14,14203
+Los Ríos,14,14103
+Los Ríos,14,14104
+Los Ríos,14,14105
+Los Ríos,14,14106
+Los Ríos,14,14107
+Los Ríos,14,14108
+Los Ríos,14,14204
+Los Ríos,14,14101
+Los Lagos,10,10202
+Los Lagos,10,10102
+Los Lagos,10,10201
+Los Lagos,10,10401
+Los Lagos,10,10203
+Los Lagos,10,10103
+Los Lagos,10,10204
+Los Lagos,10,10205
+Los Lagos,10,10104
+Los Lagos,10,10105
+Los Lagos,10,10402
+Los Lagos,10,10403
+Los Lagos,10,10107
+Los Lagos,10,10106
+Los Lagos,10,10108
+Los Lagos,10,10301
+Los Lagos,10,10404
+Los Lagos,10,10101
+Los Lagos,10,10302
+Los Lagos,10,10109
+Los Lagos,10,10206
+Los Lagos,10,10303
+Los Lagos,10,10304
+Los Lagos,10,10207
+Los Lagos,10,10208
+Los Lagos,10,10209
+Los Lagos,10,10210
+Los Lagos,10,10305
+Los Lagos,10,10306
+Los Lagos,10,10307
+Aysén,11,11201
+Aysén,11,11401
+Aysén,11,11202
+Aysén,11,11301
+Aysén,11,11101
+Aysén,11,11203
+Aysén,11,11102
+Aysén,11,11302
+Aysén,11,11402
+Aysén,11,11303
+Magallanes,12,12202
+Magallanes,12,12201
+Magallanes,12,12102
+Magallanes,12,12401
+Magallanes,12,12301
+Magallanes,12,12302
+Magallanes,12,12101
+Magallanes,12,12103
+Magallanes,12,12104
+Magallanes,12,12303
+Magallanes,12,12402

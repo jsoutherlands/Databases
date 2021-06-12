@@ -1,4 +1,4 @@
-import re
+from tabulate import tabulate
 import csv
 
 def crearTabla(cursor):
@@ -6,14 +6,12 @@ def crearTabla(cursor):
 	cursor.execute(
 		"""
 			CREATE TABLE CASOS_POR_REGION(
-		    ID_COMUNA INTEGER NOT NULL,
-		    ID_REGION INTEGER NOT NULL,
-		    NOMBRE_REGION VARCHAR2(50) NOT NULL,
-		    CASOS_CONFIRMADOS INTEGER NOT NULL,
-		    POBLACION INTEGER NOT NULL,
-		    CONSTRAINT PK_REGION PRIMARY KEY (ID_REGION),
-		    CONSTRAINT FK_COMUNA FOREIGN KEY (ID_COMUNA) REFERENCES CASOS_POR_COMUNA(ID_COMUNA)
-			)
+			ID_REGION INTEGER NOT NULL,
+			NOMBRE_REGION VARCHAR2(50) NOT NULL,
+			CASOS_CONFIRMADOS INTEGER NOT NULL,
+			POBLACION INTEGER NOT NULL,
+			CONSTRAINT PK_REGION PRIMARY KEY (ID_REGION)
+		    )
 		"""
 		)
 	print("Tabla Regiones creada.")
@@ -22,33 +20,21 @@ def insertarCSV(cursor):
 	csvRegiones = open("RegionesComunas.csv", "r", encoding='utf-8')
 	csvRegiones = csv.reader(csvRegiones)
 	next(csvRegiones)
-	csvComunas = open("CasosConfirmadosPorComuna.csv", "r", encoding='utf-8')
-	csvComunas = csv.reader(csvComunas)
-	next(csvComunas)
-	print("Ingresando archivo \"RegionesComunas.csv\" a CASOS_POR_REGION...")
-	print("Ingresando archivo \"CasosConfirmadosPorComuna.csv\" a CASOS_POR_REGION...")
-	listaComunas = []
-	for comunas in csvComunas:
-		listaComunas.append((int(comunas[1]), int(comunas[2]), int(comunas[3])))
+
 	for linea in csvRegiones:
 		nombreRegion = linea[0]
 		codigoRegion = int(linea[1])
-		codigoComuna = int(linea[2])
-		for linea2 in listaComunas:
-			if linea2[0] == codigoComuna:
-				casosConfirmados = linea2[2]
-				poblacion = linea2[1]
-		print(codigoRegion, codigoComuna, nombreRegion, casosConfirmados, poblacion)
-		cursor.execute(
-			"""
-			INSERT INTO CASOS_POR_REGION VALUES (:1, :2, :3, :4, :5)
-			""", [codigoRegion, codigoComuna, nombreRegion, casosConfirmados, poblacion]
-			)
-	print("Inserción finalizada.")
+		try:
+			cursor.execute(
+				"""
+				INSERT INTO CASOS_POR_REGION VALUES (:1,:2,0,0)
+				""", [codigoRegion, nombreRegion]
+				)
+		except Exception as err:
+			continue
 
 def crearRegion(cursor):
-	print("Al crear una región, se debe sí o sí inventar una nueva comuna.\n Esta comuna llevará el nombre de la región.")
-	codigoRegion = input("Ingresa el código de la región: ")
+	codigoRegion = input("Ingresa el código de la nueva región: ")
 	if len(str(codigoRegion)) > 2:
 		print("El codigo de la region es demasiado grande. Inténtelo nuevamente.")
 		return
@@ -60,54 +46,136 @@ def crearRegion(cursor):
 	existe = cursor.fetchone()
 	if existe == None:
 		nombreRegion = input("Ingresa el nombre que llevará la región: ")
-		codigoComuna = int(codigoRegion + "101")
-		casosConfirmados = input("Ingresa la cantidad de casos activos de la región: ")
-		poblacion = input("Ingresa la cantidad de casos activos de la región: ")
 		cursor.execute(
 			"""
-			INSERT INTO CASOS_POR_COMUNA VALUES (:1, :2, :3, :4)
-			""", [codigoComuna, nombreRegion, casosConfirmados, poblacion]
-			)
-		cursor.execute(
-			"""
-			INSERT INTO CASOS_POR_REGION VALUES (:1, :2, :3, :4, :5)
-			""", [codigoRegion, codigoComuna, nombreRegion, casosConfirmados, poblacion])
-		print("Región -y comuna inicial- creada correctamente.")
+			INSERT INTO CASOS_POR_REGION VALUES (:1, :2, 0, 0)
+			""", [codigoRegion, nombreRegion])
+		print("Región creada correctamente.")
 	else:
 		print("¡Esta región ya existe! Inténtalo nuevamente.")
 
 def verCasos(cursor):
 	codigoRegion = input("Ingrese el código de la región que desea ver: ")
-	cursor.execute(
-		"""
-		SELECT ID_REGION FROM CASOS_POR_REGION WHERE ID_REGION = :1
-		""", [codigoRegion]
-		)
-	existe = cursor.fetchone()
-	if existe == None:
-		print("La región que buscas no existe. Inténtalo nuevamente.")
-	else:
+	try:
 		cursor.execute(
 			"""
-			SELECT ID_REGION, NOMBRE_REGION, SUM(CASOS_CONFIRMADOS) AS CASOS_CONFIRMADOS FROM CASOS_POR_REGION GROUP BY ID_REGION, NOMBRE_REGION
-			"""
+			SELECT NOMBRE_REGION, CASOS_CONFIRMADOS FROM CASOS_POR_REGION WHERE ID_REGION = :1
+			""", [codigoRegion]
 			)
 		datos = cursor.fetchall()
-		print("REGIÓN 		CASOS CONFIRMADOS")
-		for region in datos:
-			if str(codigoRegion) == str(region[0]):
-				print(region[1] + "		" + str(region[2]))
+		var = datos[0][0]
+	except Exception as err:
+		print("¡Error! La región no existe.")
+	else:
+		print(tabulate(datos, ['REGION', "CASOS CONFIRMADOS"], tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
+	finally:
+		print("Operación finalizada...")
 
 def verTodos(cursor):
-	cursor.execute(
+	try:
+		cursor.execute(
 		"""
-		SELECT NOMBRE_REGION, SUM(CASOS_CONFIRMADOS) AS CASOS_CONFIRMADOS FROM CASOS_POR_REGION GROUP BY ID_REGION, NOMBRE_REGION
+		SELECT ID_REGION, NOMBRE_REGION, CASOS_CONFIRMADOS FROM CASOS_POR_REGION
 		"""
 		)
-	datos = cursor.fetchall()
-	if datos != None:
-		print("REGIÓN CASOS CONFIRMADOS")
-		for region in datos:
-			print(region[0] + "	" + str(region[1]))
-	else:
+		datos = cursor.fetchall()
+		var = datos[0][0]
+	except Exception as err:
 		print("No existen regiones para mostrar.")
+	else:
+		print(tabulate(datos, ['REGIONES', "CASOS CONFIRMADOS"], tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
+	finally:
+		print("Operación finalizada...")
+
+def top5Regiones(cursor):
+	try:
+		cursor.execute(
+			"""
+				SELECT NOMBRE_REGION, ROUND(((CASOS_CONFIRMADOS/POBLACION)*100),2) AS POSITIVIDAD_REGIONAL FROM CASOS_POR_REGION ORDER BY POSITIVIDAD_REGIONAL DESC
+			""")
+		datos = cursor.fetchmany(5)
+		var = datos[0][0]
+	except Exception as err:
+		print("No es posible mostrar el top 5 dado que no existen regiones.")
+	else:
+		print(tabulate(datos, ["REGION","POSITIVIDAD REGIONAL [%]"], tablefmt='fancy_grid', stralign='center'))
+
+def positividadRegional(cursor):
+	try:
+		cursor.execute(
+			"""
+				SELECT ID_REGION, NOMBRE_REGION, ROUND(((CASOS_CONFIRMADOS/POBLACION)*100),2) AS POSITIVIDAD_REGIONAL FROM CASOS_POR_REGION
+			""")
+		datos = cursor.fetchall()
+		var = datos[0][0]
+	except Exception as err:
+		return
+	else:
+		for dato in datos:
+			if dato[2] > 15:
+				print("La región de {} sobrepasa el límite de positividad regional en un {}% y será eliminada a continuación.".format(dato[1], str(dato[2]-15)))
+				cursor.execute(
+					"""
+						DELETE FROM CASOS_POR_REGION
+						WHERE ID_REGION = :1
+					""", [dato[0]])
+
+
+def combinarRegiones(cursor):
+	region1 = int(input("Ingrese el código de la región a combinar: "))
+	region2 = int(input("Ingrese el código de la otra región a combinar: "))
+	cursor.execute(
+		"""
+			SELECT * FROM CASOS_POR_REGION WHERE ID_REGION IN (:1,:2)
+		""",[region1, region2]
+		)
+	row = cursor.fetchall()
+	if len(row) != 2:
+		print("Error: Una o ambas regiones no existen. Inténtalo nuevamente.")
+		print("Operación finalizada.")
+		return
+	codigoRegion = int(input("Ingrese una de las siguientes opciones:\n 1 | Conservar el código de la región 1.\n 2 | Conservar el código de la región 2.\n Opción: "))
+	if codigoRegion == 1:
+		codigoRegion = region1
+		oldRegion = region2
+	elif codigoRegion == 2:
+		codigoRegion = region2
+		oldRegion = region1
+	else:
+		print("Opción no válida.")
+		print("Operación finalizada...")
+		return
+	nombreRegion = input("Ingrese nuevo nombre de la región: ")
+	cursor.execute(
+		"""
+			UPDATE CASOS_POR_COMUNA
+			SET ID_REGION = :1
+			WHERE ID_REGION = :2
+		""", [codigoRegion, oldRegion]
+		)
+	cursor.execute(
+		"""
+			SELECT SUM(CASOS_CONFIRMADOS) AS TODOS_CASOS, SUM(POBLACION) AS TODOS_POBLACION
+			FROM CASOS_POR_COMUNA
+			WHERE ID_REGION = :1
+			GROUP BY ID_REGION
+		""", [codigoRegion]
+		)
+	casosConfirmados, poblacion = cursor.fetchone()
+	print(nombreRegion, int(casosConfirmados), int(poblacion), codigoRegion)
+	cursor.execute(
+		"""
+			UPDATE CASOS_POR_REGION
+			SET NOMBRE_REGION = :1,
+				CASOS_CONFIRMADOS = :2,
+				POBLACION = :3
+			WHERE ID_REGION = :4
+		""", [nombreRegion, int(casosConfirmados), int(poblacion), codigoRegion]
+		)
+	cursor.execute(
+		"""
+			DELETE FROM CASOS_POR_REGION
+			WHERE ID_REGION = :1
+		""", [oldRegion]
+		)
+	print("Operación finalizada...")

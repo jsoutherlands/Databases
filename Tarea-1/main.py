@@ -1,19 +1,28 @@
 import cx_Oracle
-import re
+from tabulate import tabulate
 import csv
-import connect, regiones, comunas, vistas, triggers
+import connect, regiones, comunas, vistas, triggers, menu
 
 cursor, connection = connect.iniciar()
 
 #regiones.crearTabla(cursor)
 #comunas.crearTabla(cursor)
-
+#regiones.insertarCSV(cursor)
+#comunas.insertarCSV(cursor)
 #comunas.crearComuna(cursor)
 #regiones.crearRegion(cursor)
-#comunas.insertarCSV(cursor)
-#regiones.insertarCSV(cursor)
 #vistas.vistaRegiones(cursor)
+#comunas.aumentarCasos(cursor)
+#comunas.disminuirCasos(cursor)
 #comunas.verCasos(cursor)
-regiones.verCasos(cursor)
+#comunas.verTodos(cursor)
+#regiones.verCasos(cursor)
 #regiones.verTodos(cursor)
+#regiones.positividadRegional(cursor)
+#regiones.top5Regiones(cursor)
+#comunas.top5Comunas(cursor)
+#regiones.combinarRegiones(cursor)
+#comunas.combinarComunas(cursor)
+menu.menu(cursor)
+
 connect.terminar(connection)

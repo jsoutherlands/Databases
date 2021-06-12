@@ -1,8 +1,8 @@
-
+"""
 def triggerCasosComuna(cursor):
 	cursor.execute(
-		"""
-			CREATE OR REPLACE TRIGGER CASOS_COMUNA
+		""
+			CREATE OR REPLACE TRIGGER CASOS_MAYOR0_COMUNAS
 		    BEFORE UPDATE ON CASOS_POR_COMUNA
 		    FOR EACH ROW
 		    DECLARE
@@ -11,12 +11,12 @@ def triggerCasosComuna(cursor):
 		            :NEW.CASOS_CONFIRMADOS := 0;
 		        END IF;
 		    END;
-		""")
+		"")
 
 def triggerCasosRegion(cursor):
 	cursor.execute(
-		"""
-		CREATE OR REPLACE TRIGGER CASOS_REGION
+		""
+		CREATE OR REPLACE TRIGGER CASOS_MAYOR0_REGIONES
 		BEFORE UPDATE ON CASOS_POR_REGION
 		FOR EACH ROW
 		DECLARE
@@ -25,4 +25,5 @@ def triggerCasosRegion(cursor):
 				:NEW.CASOS_CONFIRMADOS := 0;
 			END IF;
 		END;
-		""")
+		"")
+"""

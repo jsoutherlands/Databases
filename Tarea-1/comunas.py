@@ -21,17 +21,13 @@ def crearTabla(cursor):
 def aumentarCasos(cursor):
 	codigoComuna = int(input("Ingrese el código de la comuna: "))
 	nuevos = int(input("Ingrese casos nuevos: "))
-	if len(str(codigoComuna)) == 5:
-		codigoRegion = int(str(codigoComuna)[0:2])
-	elif len(str(codigoComuna)) == 4:
-		codigoRegion = int(str(codigoComuna)[0])
 	try:
 		cursor.execute(
 			"""
 				SELECT * FROM CASOS_POR_COMUNA WHERE ID_COMUNA = :1 
 			""", [codigoComuna])
 		select = cursor.fetchone()
-		var = select[0]
+		codigoRegion = select[0]
 	except Exception as err:
 		print("¡Error! La comuna no existe. Inténtalo de nuevo.")
 	else:
@@ -58,17 +54,13 @@ def aumentarCasos(cursor):
 def disminuirCasos(cursor):
 	codigoComuna = int(input("Ingrese el código de la comuna: "))
 	nuevos = int(input("Ingrese casos a eliminar: "))
-	if len(str(codigoComuna)) == 5:
-		codigoRegion = int(str(codigoComuna)[0:2])
-	elif len(str(codigoComuna)) == 4:
-		codigoRegion = int(str(codigoComuna)[0])
 	try:
 		cursor.execute(
 			"""
 				SELECT * FROM CASOS_POR_COMUNA WHERE ID_COMUNA = :1 
 			""", [codigoComuna])
 		select = cursor.fetchone()
-		var = select[0]
+		codigoRegion = select[0]
 	except Exception as err:
 		print("¡Error! La comuna no existe. Inténtalo de nuevo.")
 	else:
@@ -116,7 +108,8 @@ def crearComuna(cursor):
 			SELECT ID_REGION FROM CASOS_POR_REGION WHERE ID_REGION = :1
 			""", [codigoRegion]
 			)
-		if cursor == None:
+		data = cursor.fetchone()
+		if data == None:
 			print("El código de la comuna indica que se debe crear una nueva región.")
 			nombreRegion = input("Ingrese el nombre de la región a crear: ")
 			cursor.execute(
@@ -140,7 +133,7 @@ def crearComuna(cursor):
 				"""
 				UPDATE CASOS_POR_REGION
 				SET CASOS_CONFIRMADOS = CASOS_CONFIRMADOS + :1,
-				SET POBLACION = POBLACION + :2
+					POBLACION = POBLACION + :2
 				WHERE ID_REGION = :3
 				""", [casosConfirmados, poblacion, codigoRegion]
 				)
@@ -196,7 +189,7 @@ def verTodos(cursor):
 	try:
 		cursor.execute(
 		"""
-		SELECT NOMBRE_COMUNA, CASOS_CONFIRMADOS FROM CASOS_POR_COMUNA
+		SELECT ID_COMUNA, NOMBRE_COMUNA, CASOS_CONFIRMADOS FROM CASOS_POR_COMUNA
 		"""
 		)
 		datos = cursor.fetchall()
@@ -204,7 +197,7 @@ def verTodos(cursor):
 	except Exception as err:
 		print("No existen comunas para mostrar.")
 	else:
-		print(tabulate(datos, ['COMUNAS', "CASOS CONFIRMADOS"], tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
+		print(tabulate(datos, ['CÓDIGO','COMUNAS', "CASOS CONFIRMADOS"], tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
 	finally:
 		print("Operación finalizada...")
 
@@ -212,7 +205,7 @@ def top5Comunas(cursor):
 	try:
 		cursor.execute(
 			"""
-				SELECT NOMBRE_COMUNA, ROUND(((CASOS_CONFIRMADOS/POBLACION)*100),2) AS POSITIVIDAD_COMUNAL FROM CASOS_POR_COMUNA ORDER BY POSITIVIDAD_COMUNAL DESC
+				SELECT * FROM POSITIVIDAD_COM
 			""")
 		datos = cursor.fetchmany(5)
 		var = datos[0][0]

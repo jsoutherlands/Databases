@@ -83,7 +83,7 @@ def verTodos(cursor):
 	except Exception as err:
 		print("No existen regiones para mostrar.")
 	else:
-		print(tabulate(datos, ['REGIONES', "CASOS CONFIRMADOS"], tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
+		print(tabulate(datos, ['CÓDIGO','REGIONES', "CASOS CONFIRMADOS"], tablefmt='fancy_grid', stralign='center', floatfmt='.0f'))
 	finally:
 		print("Operación finalizada...")
 
@@ -91,7 +91,7 @@ def top5Regiones(cursor):
 	try:
 		cursor.execute(
 			"""
-				SELECT NOMBRE_REGION, ROUND(((CASOS_CONFIRMADOS/POBLACION)*100),2) AS POSITIVIDAD_REGIONAL FROM CASOS_POR_REGION ORDER BY POSITIVIDAD_REGIONAL DESC
+				SELECT NOMBRE_REGION, ROUND(((CASOS_CONFIRMADOS/POBLACION)*100),2) AS POSITIVIDAD_REGIONAL FROM CASOS_POR_REGION WHERE POBLACION <> 0 ORDER BY POSITIVIDAD_REGIONAL DESC
 			""")
 		datos = cursor.fetchmany(5)
 		var = datos[0][0]
@@ -104,7 +104,7 @@ def positividadRegional(cursor):
 	try:
 		cursor.execute(
 			"""
-				SELECT ID_REGION, NOMBRE_REGION, ROUND(((CASOS_CONFIRMADOS/POBLACION)*100),2) AS POSITIVIDAD_REGIONAL FROM CASOS_POR_REGION
+				SELECT ID_REGION, NOMBRE_REGION, ROUND(((CASOS_CONFIRMADOS/POBLACION)*100),2) AS POSITIVIDAD_REGIONAL FROM CASOS_POR_REGION WHERE POBLACION <> 0
 			""")
 		datos = cursor.fetchall()
 		var = datos[0][0]

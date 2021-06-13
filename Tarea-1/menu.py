@@ -14,7 +14,7 @@ def menu(cursor):
 	print("	10	| Combinar regiones.")
 	print("	11	| Top 5 comunas con más porcentaje de casos según su población.")
 	print("	12 	| Top 5 regiones con más porcentaje de casos según su población.")
-	print("	13	| Salir.")
+	print("	13	| Guardar y salir.")
 	numeroMenu = int(input("Ingrese opción: "))
 	while numeroMenu != 13:
 		if numeroMenu == 1:
@@ -44,6 +44,7 @@ def menu(cursor):
 		elif numeroMenu == 13:
 			numeroMenu = 13
 		regiones.positividadRegional(cursor)
+		input("Pulsa ENTER para continuar... ")
 		print("	1 	| Crear una comuna.")
 		print("	2 	| Crear una región.")
 		print("	3	| Ver casos totales de una comuna.")
@@ -56,6 +57,6 @@ def menu(cursor):
 		print("	10	| Combinar regiones.")
 		print("	11	| Top 5 comunas con más porcentaje de casos según su población.")
 		print("	12 	| Top 5 regiones con más porcentaje de casos según su población.")
-		print("	13	| Salir.")
+		print("	13	| Guardar y salir.")
 		numeroMenu = int(input("Ingrese opción: "))
 	print("\nSaliendo...\n")

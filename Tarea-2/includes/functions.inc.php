@@ -86,4 +86,63 @@ function loginUser($conn, $user, $pwd){
 	}
 }
 
+function emptyUsmito($usmito){
+	if (empty($usmito)){
+		$res = true;
+	}else{
+		$res = false;
+	}
+	return $res;
+}
+
+function emptyTags($tags){
+	if (empty($tags)){
+		$res = true;
+	}else{
+		$res = false;
+	}
+	return $res;
+}
+
+
+function postUsmito($conn, $user, $usmito, $priv){
+	$query = "INSERT INTO usmitos(usuario, mensaje, privacidad) VALUES (?, ?, ?);";
+	$sql = mysqli_stmt_init($conn);
+	
+	if(!mysqli_stmt_prepare($sql, $query)){
+		header("location: ../index.php?error=queryfailed");
+		exit();
+	}
+
+	mysqli_stmt_bind_param($sql, "sss", $user, $usmito, $priv);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
+	$idRow = mysqli_insert_id($conn);
+	header("location: ../index.php?error=none");
+
+
+	return $idRow;
+}
+
+function pushTags($conn, $tags, $postId){
+	$query = "INSERT INTO tags(tag, id_usmito) VALUES (?, ?);";
+	$sql = mysqli_stmt_init($conn);
+	if(!mysqli_stmt_prepare($sql, $query)){
+		header("location: ../index.php?error=queryfailed");
+		exit();
+	}
+
+	mysqli_stmt_bind_param($sql, "si", $tag, $postId);
+
+	$explodedTags = explode(',', $tags);
+	foreach ($explodedTags as $tag) {
+		mysqli_stmt_execute($sql);
+	}
+
+	
+	mysqli_stmt_close($sql);
+	header("location: ../index.php?error=none");
+	exit();
+}
+
 ?>
